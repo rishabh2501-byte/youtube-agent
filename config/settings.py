@@ -52,6 +52,13 @@ class Settings(BaseSettings):
     stability_api_key: str = Field(default="", description="Stability AI API key")
     
     # ==========================================================================
+    # Instagram Configuration
+    # ==========================================================================
+    instagram_username: str = Field(default="", description="Instagram username")
+    instagram_password: str = Field(default="", description="Instagram password")
+    upload_to_instagram: bool = Field(default=False, description="Also upload to Instagram")
+    
+    # ==========================================================================
     # YouTube API Configuration
     # ==========================================================================
     youtube_client_secrets_file: str = Field(

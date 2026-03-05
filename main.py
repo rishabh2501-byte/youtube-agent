@@ -53,7 +53,7 @@ class YouTubeAgent:
         self.thumbnail_generator = ThumbnailGenerator()
         self.seo_generator = SEOGenerator()
         self.youtube_uploader = YouTubeUploader()
-        
+
         # Session tracking
         self.session_id = generate_unique_id("session")
         self.session_data = {}

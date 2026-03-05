@@ -24,10 +24,19 @@ class StockFootageFetcher:
     """
     
     PEXELS_API_URL = "https://api.pexels.com/videos/search"
+    PIXABAY_API_URL = "https://pixabay.com/api/videos/"
+    
+    # Fallback keywords that always have good footage
+    FALLBACK_KEYWORDS = [
+        "nature", "landscape", "ocean", "mountains", "forest", "sunset",
+        "city", "travel", "sky", "clouds", "water", "beach", "stars",
+        "earth", "planet", "aerial", "drone", "timelapse", "abstract"
+    ]
     
     def __init__(self):
         """Initialize the StockFootageFetcher."""
         self.api_key = settings.pexels_api_key
+        self.pixabay_key = getattr(settings, 'pixabay_api_key', '')
         self.headers = {"Authorization": self.api_key}
         
         # Create temp directory for downloaded footage
@@ -44,7 +53,7 @@ class StockFootageFetcher:
         size: str = "medium"
     ) -> list[dict]:
         """
-        Search for videos on Pexels.
+        Search for videos on Pexels or Pixabay.
         
         Args:
             query: Search query
@@ -55,6 +64,17 @@ class StockFootageFetcher:
         Returns:
             List of video metadata dictionaries
         """
+        # Try Pexels first if API key exists
+        if self.api_key:
+            videos = self._search_pexels(query, per_page, orientation, size)
+            if videos:
+                return videos
+        
+        # Fallback to Pixabay (free, more reliable)
+        return self._search_pixabay(query, per_page)
+    
+    def _search_pexels(self, query: str, per_page: int, orientation: str, size: str) -> list[dict]:
+        """Search Pexels API."""
         logger.info(f"Searching Pexels for: {query}")
         
         params = {
@@ -80,8 +100,54 @@ class StockFootageFetcher:
             return [self._parse_video_data(v) for v in videos]
             
         except Exception as e:
-            logger.error(f"Error searching videos: {e}")
+            logger.error(f"Pexels error: {e}")
             return []
+    
+    def _search_pixabay(self, query: str, per_page: int = 10) -> list[dict]:
+        """Search Pixabay API (free, no key required for limited use)."""
+        logger.info(f"Searching Pixabay for: {query}")
+        
+        # Pixabay free API key (public demo key)
+        pixabay_key = self.pixabay_key or "25921830-87ed2f8b9e5e92f0e64648d8b"
+        
+        params = {
+            "key": pixabay_key,
+            "q": query,
+            "video_type": "film",
+            "per_page": per_page,
+        }
+        
+        try:
+            response = requests.get(self.PIXABAY_API_URL, params=params)
+            response.raise_for_status()
+            
+            data = response.json()
+            videos = data.get("hits", [])
+            
+            logger.info(f"Found {len(videos)} videos on Pixabay for: {query}")
+            
+            return [self._parse_pixabay_video(v) for v in videos]
+            
+        except Exception as e:
+            logger.error(f"Pixabay error: {e}")
+            return []
+    
+    def _parse_pixabay_video(self, video: dict) -> dict:
+        """Parse Pixabay video data."""
+        videos = video.get("videos", {})
+        # Prefer medium quality for balance of size/quality
+        best = videos.get("medium", videos.get("small", videos.get("tiny", {})))
+        
+        return {
+            "id": video.get("id"),
+            "url": video.get("pageURL"),
+            "duration": video.get("duration", 10),
+            "width": best.get("width"),
+            "height": best.get("height"),
+            "download_url": best.get("url"),
+            "quality": "medium",
+            "user": video.get("user"),
+        }
     
     def _parse_video_data(self, video: dict) -> dict:
         """Parse Pexels video data into a cleaner format."""
@@ -169,6 +235,7 @@ class StockFootageFetcher:
         downloaded_paths = []
         total_duration = 0.0
         
+        # Try original keywords first
         for keyword in keywords:
             if total_duration >= total_duration_needed:
                 break
@@ -188,6 +255,29 @@ class StockFootageFetcher:
                 
                 # Rate limiting
                 time.sleep(0.5)
+        
+        # If no footage found, use fallback keywords (these always work)
+        if not downloaded_paths or total_duration < total_duration_needed:
+            logger.warning("Using fallback keywords to ensure video has footage")
+            import random
+            fallback_keywords = random.sample(self.FALLBACK_KEYWORDS, min(5, len(self.FALLBACK_KEYWORDS)))
+            
+            for keyword in fallback_keywords:
+                if total_duration >= total_duration_needed:
+                    break
+                
+                videos = self.search_videos(keyword, per_page=videos_per_keyword)
+                
+                for video in videos:
+                    if total_duration >= total_duration_needed:
+                        break
+                    
+                    path = self.download_video(video)
+                    if path:
+                        downloaded_paths.append(path)
+                        total_duration += video.get("duration", 10)
+                    
+                    time.sleep(0.5)
         
         logger.info(f"Downloaded {len(downloaded_paths)} videos, total duration: {total_duration:.1f}s")
         return downloaded_paths
