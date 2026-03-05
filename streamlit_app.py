@@ -3,13 +3,34 @@ YouTube Agent - Cloud Web UI
 Streamlit Cloud compatible version (video generation only, no YouTube upload).
 """
 
-import streamlit as st
-import sys
 import os
+import sys
 from pathlib import Path
 from datetime import datetime
-import tempfile
-import base64
+
+# Set environment variables BEFORE importing settings
+os.environ.setdefault("GROQ_API_KEY", "")
+os.environ.setdefault("PEXELS_API_KEY", "")
+os.environ.setdefault("LLM_PROVIDER", "groq")
+os.environ.setdefault("TTS_PROVIDER", "gtts")
+os.environ.setdefault("IMAGE_GENERATOR", "placeholder")
+os.environ.setdefault("OUTPUT_DIR", "output")
+os.environ.setdefault("VIDEO_DURATION_SECONDS", "60")
+os.environ.setdefault("TRENDING_REGION", "US")
+os.environ.setdefault("LOG_LEVEL", "INFO")
+
+import streamlit as st
+
+# Now get secrets and update env
+try:
+    if "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+    if "PEXELS_API_KEY" in st.secrets:
+        os.environ["PEXELS_API_KEY"] = st.secrets["PEXELS_API_KEY"]
+except Exception:
+    pass
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 # Page config
 st.set_page_config(
@@ -18,21 +39,10 @@ st.set_page_config(
     layout="centered"
 )
 
-# Check for required API keys
-GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.environ.get("GROQ_API_KEY", ""))
-PEXELS_API_KEY = st.secrets.get("PEXELS_API_KEY", os.environ.get("PEXELS_API_KEY", ""))
-
 if not GROQ_API_KEY:
     st.error("⚠️ GROQ_API_KEY not found in secrets!")
-    st.info("Add GROQ_API_KEY in Streamlit Cloud secrets or environment variables.")
+    st.info("Add GROQ_API_KEY in Streamlit Cloud secrets.")
     st.stop()
-
-# Set environment variables
-os.environ["GROQ_API_KEY"] = GROQ_API_KEY
-os.environ["PEXELS_API_KEY"] = PEXELS_API_KEY
-os.environ["LLM_PROVIDER"] = "groq"
-os.environ["TTS_PROVIDER"] = "gtts"
-os.environ["IMAGE_GENERATOR"] = "placeholder"
 
 # Now import after env vars are set
 from main import YouTubeAgent
