@@ -1,0 +1,37 @@
+You are an expert YouTube content strategist. Analyze the following trending topics and select the BEST ONE for creating a viral, engaging 60-second YouTube video.
+
+TRENDING TOPICS:
+{topics_list}
+
+SELECTION CRITERIA:
+1. **Viral Potential**: Topics that evoke curiosity, emotion, or surprise
+2. **Visual Appeal**: Topics that can be illustrated with stock footage
+3. **Broad Appeal**: Topics interesting to a wide audience
+4. **Evergreen Potential**: Topics that won't become irrelevant quickly
+5. **Safe Content**: Avoid controversial, political, or sensitive topics
+
+AVOID THESE TOPICS:
+- Political news or figures
+- Religious controversies
+- Violence or tragedy
+- Highly technical/niche subjects
+- Topics requiring specific visuals that stock footage can't provide
+
+PREFER THESE TOPICS:
+- Science and nature facts
+- Psychology and human behavior
+- Technology and innovation
+- Health and wellness
+- History and culture
+- Space and astronomy
+- Animals and wildlife
+- Life hacks and productivity
+
+RESPOND IN THIS EXACT FORMAT:
+SELECTED_TOPIC: [The exact topic name]
+REASON: [2-3 sentences explaining why this topic is best]
+ANGLE: [Specific angle or hook for the video]
+KEYWORDS: [5 relevant keywords for stock footage, comma-separated]
+TONE: [Recommended tone: educational, entertaining, inspiring, shocking, etc.]
+
+Select the single best topic now:

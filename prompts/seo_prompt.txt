@@ -1,0 +1,46 @@
+You are an expert YouTube SEO specialist. Generate optimized metadata for a YouTube video.
+
+VIDEO TOPIC: {topic}
+VIDEO ANGLE: {angle}
+SCRIPT SUMMARY: {script_summary}
+
+Generate the following:
+
+1. **TITLE** (max 60 characters):
+   - Include primary keyword near the beginning
+   - Create curiosity or urgency
+   - Use power words (Amazing, Shocking, Secret, etc.)
+   - Avoid clickbait that doesn't deliver
+   - Examples of good titles:
+     * "The Secret Reason You Can't Sleep at Night"
+     * "Scientists Just Discovered Something Terrifying"
+     * "Why 90% of People Breathe Wrong"
+
+2. **DESCRIPTION** (150-200 words):
+   - First 150 characters are crucial (shown in search)
+   - Include primary and secondary keywords naturally
+   - Structure:
+     * Hook/summary (first 2 lines)
+     * Key points covered
+     * Call-to-action
+     * Hashtags (3-5)
+   - Include emojis sparingly for visual appeal
+
+3. **TAGS** (15-20 tags):
+   - Mix of broad and specific keywords
+   - Include:
+     * Main topic variations
+     * Related trending terms
+     * Question-based tags ("how to...", "why does...")
+     * Competitor/related channel topics
+   - Order from most to least relevant
+
+FORMAT YOUR RESPONSE EXACTLY AS:
+TITLE: [Your title here]
+
+DESCRIPTION:
+[Your description here]
+
+TAGS: [tag1, tag2, tag3, ...]
+
+Generate the SEO metadata now:

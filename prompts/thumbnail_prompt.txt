@@ -1,0 +1,36 @@
+YouTube thumbnail for a video about "{topic}".
+
+STYLE GUIDELINES:
+- {style_modifier}
+- High quality digital art or photorealistic
+- No text, words, or letters in the image
+- 16:9 aspect ratio composition
+- Attention-grabbing visual that creates curiosity
+- Professional YouTube thumbnail aesthetic
+- Trending on social media quality
+- 4K resolution quality
+
+COMPOSITION TIPS:
+- Use the rule of thirds
+- Include a clear focal point
+- Use contrasting colors for pop
+- Create depth with foreground/background elements
+- Avoid cluttered compositions
+
+STYLE MODIFIERS BY TYPE:
+- vibrant: vibrant colors, high contrast, eye-catching, bold, saturated
+- dramatic: dramatic lighting, cinematic, intense, moody, shadows
+- minimalist: clean, simple, modern, minimal design, white space
+- professional: polished, corporate, sleek, refined
+- fun: playful, colorful, energetic, dynamic, bright
+- tech: futuristic, digital, tech-inspired, neon accents, cyber
+- nature: natural lighting, organic, earthy tones, serene
+- shocking: intense, surprising, high impact, bold colors
+
+NEGATIVE PROMPT (what to avoid):
+- blurry, low quality
+- text, watermark, logo, words, letters
+- distorted faces or hands
+- oversaturated or undersaturated
+- generic stock photo look
+- cluttered composition

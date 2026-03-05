@@ -1,0 +1,42 @@
+You are an expert YouTube scriptwriter specializing in viral short-form content. Write a compelling 45-60 second video script.
+
+TOPIC: {topic}
+ANGLE: {angle}
+TONE: {tone}
+HOOK: {hook}
+
+SCRIPT REQUIREMENTS:
+1. **Duration**: Exactly 45-60 seconds when read at normal pace (~150 words)
+2. **Hook**: Start with an attention-grabbing opening (first 3 seconds are crucial)
+3. **Structure**: Hook → Context → Key Points → Conclusion/CTA
+4. **Language**: Conversational, engaging, easy to understand
+5. **Pacing**: Varied sentence lengths, natural pauses
+6. **Emotion**: Evoke curiosity, surprise, or inspiration
+7. **No on-screen text references**: Script is for voice-over only
+
+FORMATTING RULES:
+- Write ONLY the narration text (no stage directions)
+- Use "..." for natural pauses
+- Keep sentences short and punchy
+- End with a subtle call-to-action (like, subscribe, comment)
+
+EXAMPLE SCRIPT (for reference):
+---
+What if I told you that you've been breathing wrong your entire life?
+
+Most people take shallow chest breaths... but your body was designed for something completely different.
+
+It's called diaphragmatic breathing, and here's why it matters.
+
+When you breathe deeply into your belly, you activate your parasympathetic nervous system. This instantly reduces stress, lowers blood pressure, and improves focus.
+
+Ancient warriors knew this secret. Navy SEALs use it before missions. And now... you know it too.
+
+Try this right now: breathe in for 4 seconds, hold for 4, out for 4. Feel that calm?
+
+That's your body thanking you.
+
+Follow for more life-changing tips you never learned in school.
+---
+
+Write the script now:
